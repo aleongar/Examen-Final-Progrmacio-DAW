@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="daw.programacio.thenewmisterquestion.controllers.MainController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+<AnchorPane maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="daw.programacio.thenewmisterquestion.controllers.MainController">
+   <children>
+      <TableView fx:id="tableView" layoutX="364.0" layoutY="80.0" prefHeight="427.0" prefWidth="383.0" />
+      <ImageView fitHeight="243.0" fitWidth="326.0" layoutX="48.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../../images/Views.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="61.0" layoutY="379.0" mnemonicParsing="false" onAction="#goToQuestions" prefHeight="60.0" prefWidth="251.0" text="Afegir preguntes i respostes" />
+      <Button layoutX="61.0" layoutY="477.0" mnemonicParsing="false" onAction="#goToPlay" prefHeight="60.0" prefWidth="251.0" text="Jugar" />
+      <Label layoutX="466.0" layoutY="49.0" text="Guanyadors de les partides" />
+   </children>
+</AnchorPane>
