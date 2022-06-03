@@ -15,14 +15,14 @@ public class QuestionModel {
     private SimpleIntegerProperty value;
     private SimpleIntegerProperty usage = new SimpleIntegerProperty(0);
 
-    public QuestionModel(int id, String question, String answerA, String answerB, String answerC, String correctAnswer, int category, int value) {
+    public QuestionModel(int id, String question, String answerA, String answerB, String answerC, String correctAnswer, String category, int value) {
         this.id = new SimpleIntegerProperty(id);
         this.question = new SimpleStringProperty(question);
         this.answerA = new SimpleStringProperty(answerA);
         this.answerB = new SimpleStringProperty(answerB);
         this.answerC = new SimpleStringProperty(answerC);
         this.correctAnswer = new SimpleStringProperty(correctAnswer);
-        this.category = new SimpleStringProperty(Integer.toString(category));
+        this.category = new SimpleStringProperty(category);
         this.value = new SimpleIntegerProperty(value);
     }
 

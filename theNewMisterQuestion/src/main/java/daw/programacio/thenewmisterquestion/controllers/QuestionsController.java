@@ -77,7 +77,8 @@ public class QuestionsController {
         try {
             scene = new Scene(fxmlLoader.load());
             if(tableView.getSelectionModel().getSelectedItem() != null){
-                ((QuestionController)fxmlLoader.getController()).initialize(MisterQuestionApplication.questions.get(index));
+                ((QuestionController)fxmlLoader.getController())
+                        .initialize(MisterQuestionApplication.questions.get(index));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -100,7 +101,7 @@ public class QuestionsController {
         System.out.println("Add question");
         System.out.println("questions");
         FXMLLoader fxmlLoader = new FXMLLoader(MisterQuestionApplication.class
-                .getResource("views/question-view.fxml"));
+                .getResource("views/categories-view.fxml"));
         Scene scene = null;
         try {
             scene = new Scene(fxmlLoader.load());

@@ -45,13 +45,23 @@ public class QuestionController {
         BRadioButton.setToggleGroup(tg);
         CRadioButton.setToggleGroup(tg);
         for(CategoryModel c : MisterQuestionApplication.categories)
-            categoriesComboBox.getItems().add(c);
+            categoriesComboBox.getItems().add(c.getName());
         update = false;
     }
 
     public void initialize(QuestionModel question){
-        initialize();
         update = true;
+        questionTextField.setText(question.getQuestion());
+        valueTextField.setText(Integer.toString(question.getValue()));
+        ansATextField.setText(question.getAnswerA());
+        ansBTextField.setText(question.getAnswerB());
+        ansCTextField.setText(question.getAnswerC());
+        if(question.getCorrectAnswer().compareTo("1") == 0)
+            ARadioButton.setSelected(true);
+        else if(question.getCorrectAnswer().compareTo("2") == 0)
+            BRadioButton.setSelected(true);
+        else
+            CRadioButton.setSelected(true);
         categoriesComboBox.getSelectionModel().select(question.getCategory());
     }
 
@@ -60,7 +70,8 @@ public class QuestionController {
         if(update)
             DBFacade.deleteQuestion(questionTextField.getText());
         DBFacade.addQuestion(questionTextField.getText(), ansATextField.getText(),
-                ansBTextField.getText(), ansCTextField.getText(), ARadioButton.isSelected() ? 1 : BRadioButton.isSelected() ? 2 : 3, (String)categoriesComboBox.getSelectionModel().getSelectedItem(), Integer.parseInt(valueTextField.getText()));
+                ansBTextField.getText(), ansCTextField.getText(), ARadioButton.isSelected() ? 1 : BRadioButton.isSelected() ? 2 : 3,
+                (String)categoriesComboBox.getSelectionModel().getSelectedItem(), Integer.parseInt(valueTextField.getText()));
         System.out.println("saving");
     }
 

@@ -34,7 +34,7 @@ public final class DBFacade {
     }
 
     public static ArrayList<QuestionModel> selectQuestions() {
-        String sql = "SELECT * FROM question;";
+        String sql = "SELECT q.*, c.name FROM question q, category c WHERE c.id = q.category;";
         ArrayList<QuestionModel> questions = new ArrayList<>();
         if (conn != null) {
             Statement stmt = null;
@@ -44,7 +44,7 @@ public final class DBFacade {
                 while (rs.next()) {
                     questions.add(new QuestionModel(rs.getInt(1), rs.getString(2),
                             rs.getString(3), rs.getString(4), rs.getString(5),
-                            rs.getString(6), rs.getInt(7), rs.getInt(8)));
+                            rs.getString(6),rs.getString(9) , rs.getInt(8)));
                     System.out.println(rs.getInt(1));
                 }
             } catch (SQLException e) {
@@ -74,7 +74,7 @@ public final class DBFacade {
     }
 
     public static ArrayList<PlayerModel> selectPlayers() {
-        String sql = "SELECT id, score FROM player ORDER BY score;";
+        String sql = "SELECT name, score FROM player ORDER BY score DESC;";
         ArrayList<PlayerModel> players = new ArrayList<>();
         if (conn != null) {
             Statement stmt = null;
@@ -119,9 +119,9 @@ public final class DBFacade {
     }
 
     public static void addQuestion(String question, String a, String b, String c, int correct, String category, int value){
-        String sql = "INSERT INTO question (question, answers_A, answers_B, answers_C, correct_answers, category, value) " +
-                "question = '" + question + "', '" + a + "', '" + b + "', '" + c + "', '" +
-                correct + "', (SELECT id FROM categories WHERE name = '" + category + "') , " + value;
+        String sql = "INSERT INTO question (question, answer_A, answer_B, answer_C, correct_answer, category, value) values" +
+                "('" + question + "', '" + a + "', '" + b + "', '" + c + "', '" +
+                correct + "', (SELECT id FROM category WHERE name = '" + category + "') , " + value + ")";
         if (conn != null) {
             Statement stmt = null;
             try {
