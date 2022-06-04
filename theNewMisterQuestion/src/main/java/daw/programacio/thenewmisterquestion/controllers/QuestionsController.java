@@ -14,12 +14,14 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class QuestionsController {
     private Stage questionStage;
+    private Stage thisStage;
 
     private TableColumn questionColumn;
 
@@ -34,17 +36,14 @@ public class QuestionsController {
     private int index;
 
 
-    public void initialize() {
+    public void initialize(Stage stage) {
+        thisStage = stage;
         System.out.println("hola");
         questionColumn = new TableColumn("Pregunta");
         categoryColumn = new TableColumn("Categoria");
         usageColumn = new TableColumn("Usos");
         tableView.getColumns().clear();
         questions = FXCollections.observableArrayList();
-        for (QuestionModel q : MisterQuestionApplication.questions) {
-            questions.add(q);
-            System.out.println(q.getQuestion());
-        }
         questionColumn.setCellValueFactory(
                 new PropertyValueFactory<QuestionModel, String>("question")
         );
@@ -55,7 +54,7 @@ public class QuestionsController {
                 new PropertyValueFactory<QuestionModel, Integer>("usage")
         );
         tableView.getColumns().addAll(questionColumn, categoryColumn, usageColumn);
-        tableView.setItems(questions);
+        updateList();
         index = tableView.getSelectionModel().getSelectedIndex();
         tableView.setOnMouseClicked((mouseEvent)->{
             if(mouseEvent.getButton() == MouseButton.PRIMARY){
@@ -64,6 +63,14 @@ public class QuestionsController {
                 }
             }
         });
+    }
+
+    private void updateList(){
+        questions.clear();
+        for (QuestionModel q : MisterQuestionApplication.questions) {
+            questions.add(q);
+        }
+        tableView.setItems(questions);
     }
 
     @FXML
@@ -78,7 +85,10 @@ public class QuestionsController {
             scene = new Scene(fxmlLoader.load());
             if(tableView.getSelectionModel().getSelectedItem() != null){
                 ((QuestionController)fxmlLoader.getController())
-                        .initialize(MisterQuestionApplication.questions.get(index));
+                        .initialize(questionStage ,MisterQuestionApplication.questions.get(index));
+            } else{
+                ((QuestionController)fxmlLoader.getController())
+                        .initialize(questionStage);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -86,12 +96,21 @@ public class QuestionsController {
         questionStage.setTitle("Questions");
         questionStage.setScene(scene);
         questionStage.show();
+        questionStage.setOnHidden((windowEvent) -> {
+            if(((QuestionController)fxmlLoader.getController()).isSaving()){
+                updateList();
+            }
+        });
     }
 
     @FXML
     protected void deleteQuestion(){
         System.out.println("Delete question");
-        DBFacade.deleteQuestion(MisterQuestionApplication.questions.get(index).getQuestion());
+        if(tableView.getSelectionModel().getSelectedItem() != null) {
+            DBFacade.deleteQuestion(MisterQuestionApplication.questions.get(index).getQuestion());
+            MisterQuestionApplication.questions.remove(index);
+        }
+        updateList();
     }
 
     @FXML
@@ -119,5 +138,6 @@ public class QuestionsController {
     @FXML
     protected void backToMain(){
         System.out.println("main");
+        thisStage.close();
     }
 }

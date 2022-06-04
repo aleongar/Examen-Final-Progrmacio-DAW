@@ -37,16 +37,21 @@ public class MainController {
         this.thisStage = thisStage;
     }
 
+    private void updateList(){
+        players.clear();
+        for (PlayerModel p : users) {
+            players.add(p);
+        }
+        tableView.setItems(players);
+    }
+
     public void initialize(){
         position = new TableColumn("position");
         name = new TableColumn("name");
         points = new TableColumn("score");
         tableView.getColumns().clear();
         players = FXCollections.observableArrayList();
-        for (PlayerModel p : users) {
-            players.add(p);
-            System.out.println(p);
-        }
+
         position.setCellValueFactory(
                 new PropertyValueFactory<PlayerModel, Integer>("position")
         );
@@ -57,7 +62,7 @@ public class MainController {
                 new PropertyValueFactory<PlayerModel, Integer>("score")
         );
         tableView.getColumns().addAll(position, name, points);
-        tableView.setItems(players);
+        updateList();
         questionStage = new Stage();
         playStage = new Stage();
     }
@@ -71,13 +76,17 @@ public class MainController {
         Scene scene = null;
         try {
             scene = new Scene(fxmlLoader.load());
-            ((QuestionsController)fxmlLoader.getController()).initialize();
+            ((QuestionsController)fxmlLoader.getController()).initialize(questionStage);
         } catch (IOException e) {
             e.printStackTrace();
         }
         questionStage.setTitle("Questions");
         questionStage.setScene(scene);
         questionStage.show();
+        questionStage.setOnHidden((windowEvent) -> {
+            thisStage.show();
+        });
+        thisStage.hide();
     }
 
     @FXML
@@ -92,8 +101,13 @@ public class MainController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        questionStage.setTitle("Players");
-        questionStage.setScene(scene);
-        questionStage.show();
+        playStage.setTitle("Players");
+        playStage.setScene(scene);
+        playStage.show();
+        playStage.setOnHidden((windowEvent) -> {
+            thisStage.show();
+            updateList();
+        });
+        thisStage.hide();
     }
 }

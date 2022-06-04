@@ -13,6 +13,7 @@ public class QuestionModel {
     private SimpleStringProperty correctAnswer;
     private SimpleStringProperty category;
     private SimpleIntegerProperty value;
+
     private SimpleIntegerProperty usage = new SimpleIntegerProperty(0);
 
     public QuestionModel(int id, String question, String answerA, String answerB, String answerC, String correctAnswer, String category, int value) {

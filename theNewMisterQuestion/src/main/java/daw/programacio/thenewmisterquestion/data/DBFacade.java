@@ -118,10 +118,10 @@ public final class DBFacade {
         }
     }
 
-    public static void addQuestion(String question, String a, String b, String c, int correct, String category, int value){
+    public static void addQuestion(String question, String a, String b, String c, int correct, int category, int value){
         String sql = "INSERT INTO question (question, answer_A, answer_B, answer_C, correct_answer, category, value) values" +
-                "('" + question + "', '" + a + "', '" + b + "', '" + c + "', '" +
-                correct + "', (SELECT id FROM category WHERE name = '" + category + "') , " + value + ")";
+                "('" + question + "', '" + a + "', '" + b + "', '" + c + "', " +
+                correct + ", " + category + ", " + value + ")";
         if (conn != null) {
             Statement stmt = null;
             try {
@@ -141,6 +141,52 @@ public final class DBFacade {
                 stmt = conn.createStatement();
                 stmt.execute(sql);
             } catch (SQLException e) {
+                System.err.println(e.getMessage());
+            }
+        }
+    }
+
+    public static int getCategoryId(String category){
+        String sql = "SELECT id FROM category WHERE name = '" + category + "'";
+        ArrayList<PlayerModel> players = new ArrayList<>();
+        if (conn != null) {
+            Statement stmt = null;
+            try {
+                stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(sql);
+                if(rs.next())
+                    return rs.getInt(1);
+            } catch (SQLException e) {
+                System.err.println(e.getMessage());
+            }
+        }
+        return -1;
+    }
+
+    public static PlayerModel getPlayer(String name){
+        String sql = "SELECT * FROM player WHERE name = '" + name + "'";
+        if(conn != null){
+            Statement stmt = null;
+            try{
+                stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(sql);
+                if(rs.next())
+                    return new PlayerModel(rs.getString(2), rs.getInt(3));
+            }catch (SQLException e){
+                System.err.println(e.getMessage());
+            }
+        }
+        return null;
+    }
+
+    public static void addPlayer(String name, int score){
+        String sql = "INSERT INTO player (name, score) VALUES ('" + name + "', " + score + ")";
+        if(conn != null){
+            Statement stmt = null;
+            try{
+                stmt = conn.createStatement();
+                stmt.execute(sql);
+            }catch (SQLException e){
                 System.err.println(e.getMessage());
             }
         }

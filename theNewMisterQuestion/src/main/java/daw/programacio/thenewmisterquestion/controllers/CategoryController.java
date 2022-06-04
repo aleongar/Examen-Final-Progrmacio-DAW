@@ -16,7 +16,7 @@ public class CategoryController {
     private void updateTable(){
         categoriesListView.getItems().clear();
         for(CategoryModel c: MisterQuestionApplication.categories){
-            categoriesListView.getItems().add(c);
+            categoriesListView.getItems().add(c.getName());
         }
     }
 
@@ -33,8 +33,8 @@ public class CategoryController {
             System.out.println("add");
             DBFacade.addCategory(categoryTextField.getText());
             MisterQuestionApplication.categories.add(new CategoryModel(1, categoryTextField.getText()));
-
         }
+        updateTable();
     }
 
     @FXML
@@ -42,8 +42,9 @@ public class CategoryController {
         if(categoriesListView.getSelectionModel().getSelectedItem() != null) {
             System.out.println("delete");
             DBFacade.deleteCategory(categoryTextField.getText());
-            MisterQuestionApplication.categories.add(new CategoryModel(1, categoryTextField.getText()));
+            MisterQuestionApplication.categories.remove(categoriesListView.getSelectionModel().getSelectedIndex());
         }
+        updateTable();
     }
 
     @FXML

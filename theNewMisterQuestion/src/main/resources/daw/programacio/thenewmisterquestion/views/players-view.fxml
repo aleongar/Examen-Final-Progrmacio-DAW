@@ -9,7 +9,7 @@
 <AnchorPane maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="daw.programacio.thenewmisterquestion.controllers.PlayersController">
    <children>
       <Label layoutX="222.0" layoutY="79.0" text="Numero de torns de la partida" />
-      <Spinner fx:id="playersValue" layoutX="345.0" layoutY="147.0" />
+      <Spinner fx:id="turnsSpinner" layoutX="345.0" layoutY="147.0" />
       <Label layoutX="222.0" layoutY="254.0" text="Introduix nom del jugadors" />
       <Label layoutX="222.0" layoutY="322.0" text="Jugador 1" />
       <Label layoutX="222.0" layoutY="363.0" text="Jugador 2" />

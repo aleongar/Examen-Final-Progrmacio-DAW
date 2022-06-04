@@ -9,9 +9,12 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.stage.Stage;
 
 public class QuestionController {
     private boolean update;
+    private boolean saving;
+    private Stage thisStage;
     @FXML
     private TextField questionTextField;
 
@@ -38,8 +41,11 @@ public class QuestionController {
 
     @FXML
     private ComboBox categoriesComboBox;
+    private QuestionModel question;
 
-    public void initialize(){
+
+    public void initialize(Stage stage){
+        thisStage = stage;
         ToggleGroup tg = new ToggleGroup();
         ARadioButton.setToggleGroup(tg);
         BRadioButton.setToggleGroup(tg);
@@ -47,9 +53,12 @@ public class QuestionController {
         for(CategoryModel c : MisterQuestionApplication.categories)
             categoriesComboBox.getItems().add(c.getName());
         update = false;
+        saving = false;
     }
 
-    public void initialize(QuestionModel question){
+    public void initialize(Stage stage,QuestionModel question){
+        initialize(stage);
+        this.question = question;
         update = true;
         questionTextField.setText(question.getQuestion());
         valueTextField.setText(Integer.toString(question.getValue()));
@@ -67,21 +76,31 @@ public class QuestionController {
 
     @FXML
     protected void save(){
-        if(update)
-            DBFacade.deleteQuestion(questionTextField.getText());
+        if(update) {
+            DBFacade.deleteQuestion(question.getQuestion());
+            MisterQuestionApplication.questions.remove(question);
+        }
+        int id = DBFacade.getCategoryId((String)categoriesComboBox.getSelectionModel().getSelectedItem());
+        System.out.println(id);
         DBFacade.addQuestion(questionTextField.getText(), ansATextField.getText(),
                 ansBTextField.getText(), ansCTextField.getText(), ARadioButton.isSelected() ? 1 : BRadioButton.isSelected() ? 2 : 3,
-                (String)categoriesComboBox.getSelectionModel().getSelectedItem(), Integer.parseInt(valueTextField.getText()));
+                id, Integer.parseInt(valueTextField.getText()));
+        MisterQuestionApplication.questions.add(new QuestionModel(1 ,questionTextField.getText(), ansATextField.getText(),
+                ansBTextField.getText(), ansCTextField.getText(), ARadioButton.isSelected() ? "1" : BRadioButton.isSelected() ? "2" : "3",
+                (String)categoriesComboBox.getSelectionModel().getSelectedItem(), Integer.parseInt(valueTextField.getText())));
         System.out.println("saving");
+        saving = true;
+        thisStage.close();
     }
 
-    @FXML
-    protected void delete(){
-        System.out.println("deleting");
+    public boolean isSaving() {
+        return saving;
     }
 
     @FXML
     protected void cancel(){
         System.out.println("backing");
+        saving = false;
+        thisStage.close();
     }
 }

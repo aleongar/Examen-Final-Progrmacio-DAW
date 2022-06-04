@@ -5,20 +5,32 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="daw.programacio.thenewmisterquestion.views.GameView">
+<AnchorPane maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="daw.programacio.thenewmisterquestion.controllers.GameController">
    <children>
-      <RadioButton layoutX="201.0" layoutY="155.0" mnemonicParsing="false" text="name1" />
-      <RadioButton layoutX="201.0" layoutY="185.0" mnemonicParsing="false" text="name2" />
-      <RadioButton layoutX="201.0" layoutY="212.0" mnemonicParsing="false" text="name3" />
-      <Label layoutX="325.0" layoutY="156.0" text="points" />
-      <RadioButton layoutX="201.0" layoutY="240.0" mnemonicParsing="false" text="name4" />
-      <Label layoutX="325.0" layoutY="186.0" text="points" />
-      <Label layoutX="325.0" layoutY="213.0" text="points" />
-      <Label layoutX="325.0" layoutY="241.0" text="points" />
-      <Label layoutX="190.0" layoutY="105.0" text="Turno" />
-      <Button layoutX="139.0" layoutY="463.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="66.0" text="Cine" />
-      <Button layoutX="139.0" layoutY="516.0" mnemonicParsing="false" text="Ciencia" />
-      <Button layoutX="139.0" layoutY="414.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="66.0" text="Esport" />
+      <RadioButton fx:id="player1turn" layoutX="201.0" layoutY="122.0" mnemonicParsing="false" text="name1" visible="false" />
+      <RadioButton fx:id="player2turn" layoutX="201.0" layoutY="152.0" mnemonicParsing="false" text="name2" visible="false" />
+      <RadioButton fx:id="player3turn" layoutX="201.0" layoutY="179.0" mnemonicParsing="false" text="name3" visible="false" />
+      <Label fx:id="player1points" layoutX="303.0" layoutY="122.0" text="points" visible="false" />
+      <RadioButton fx:id="player4turn" layoutX="201.0" layoutY="207.0" mnemonicParsing="false" text="name4" visible="false" />
+      <Label fx:id="player2points" layoutX="303.0" layoutY="152.0" text="points" visible="false" />
+      <Label fx:id="player3points" layoutX="303.0" layoutY="179.0" text="points" visible="false" />
+      <Label fx:id="player4points" layoutX="303.0" layoutY="207.0" text="points" visible="false" />
+      <Label layoutX="189.0" layoutY="90.0" text="Turno" />
+      <Button fx:id="ctg2" layoutX="194.0" layoutY="464.0" mnemonicParsing="false" onAction="#question" prefHeight="24.0" prefWidth="66.0" text="Cine" visible="false" />
+      <Button fx:id="ctg3" layoutX="194.0" layoutY="516.0" mnemonicParsing="false" onAction="#question" prefHeight="17.0" prefWidth="66.0" text="Ciencia" visible="false" />
+      <Button fx:id="ctg1" layoutX="194.0" layoutY="415.0" mnemonicParsing="false" onAction="#question" prefHeight="24.0" prefWidth="66.0" text="Esport" visible="false" />
+      <Label layoutX="304.0" layoutY="90.0" text="Puntos" />
+      <Button fx:id="ctg5" layoutX="283.0" layoutY="463.0" mnemonicParsing="false" onAction="#question" prefHeight="24.0" prefWidth="66.0" text="Cine" visible="false" />
+      <Button fx:id="ctg6" layoutX="283.0" layoutY="515.0" mnemonicParsing="false" onAction="#question" prefHeight="17.0" prefWidth="66.0" text="Ciencia" visible="false" />
+      <Button fx:id="ctg4" layoutX="283.0" layoutY="414.0" mnemonicParsing="false" onAction="#question" prefHeight="24.0" prefWidth="66.0" text="Esport" visible="false" />
+      <Button fx:id="ctg8" layoutX="369.0" layoutY="462.0" mnemonicParsing="false" onAction="#question" prefHeight="24.0" prefWidth="66.0" text="Cine" visible="false" />
+      <Button fx:id="ctg9" layoutX="369.0" layoutY="514.0" mnemonicParsing="false" onAction="#question" prefHeight="17.0" prefWidth="66.0" text="Ciencia" visible="false" />
+      <Button fx:id="ctg7" layoutX="369.0" layoutY="413.0" mnemonicParsing="false" onAction="#question" prefHeight="24.0" prefWidth="66.0" text="Esport" visible="false" />
+      <Button fx:id="ctg11" layoutX="455.0" layoutY="462.0" mnemonicParsing="false" onAction="#question" prefHeight="24.0" prefWidth="66.0" text="Cine" visible="false" />
+      <Button fx:id="ctg12" layoutX="455.0" layoutY="514.0" mnemonicParsing="false" onAction="#question" prefHeight="17.0" prefWidth="66.0" text="Ciencia" visible="false" />
+      <Button fx:id="ctg10" layoutX="455.0" layoutY="413.0" mnemonicParsing="false" onAction="#question" prefHeight="24.0" prefWidth="66.0" text="Esport" visible="false" />
+      <Button fx:id="ctg14" layoutX="541.0" layoutY="461.0" mnemonicParsing="false" onAction="#question" prefHeight="24.0" prefWidth="66.0" text="Cine" visible="false" />
+      <Button fx:id="ctg15" layoutX="541.0" layoutY="513.0" mnemonicParsing="false" onAction="#question" prefHeight="17.0" prefWidth="66.0" text="Ciencia" visible="false" />
+      <Button fx:id="ctg13" layoutX="541.0" layoutY="412.0" mnemonicParsing="false" onAction="#question" prefHeight="24.0" prefWidth="66.0" text="Esport" visible="false" />
    </children>
 </AnchorPane>
