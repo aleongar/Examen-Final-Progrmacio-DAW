@@ -53,7 +53,7 @@ public class PlayersController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        ((GameController) fxmlLoader.getController()).initialize(playStage, getPlayers());
+        ((GameController) fxmlLoader.getController()).initialize(playStage, getPlayers(), (int)turnsSpinner.getValue());
         playStage.setTitle("Hello!");
         playStage.setScene(scene);
         playStage.show();

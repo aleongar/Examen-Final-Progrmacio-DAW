@@ -44,7 +44,7 @@ public final class DBFacade {
                 while (rs.next()) {
                     questions.add(new QuestionModel(rs.getInt(1), rs.getString(2),
                             rs.getString(3), rs.getString(4), rs.getString(5),
-                            rs.getString(6),rs.getString(9) , rs.getInt(8)));
+                            rs.getString(6),rs.getString(9) , rs.getInt(7)));
                     System.out.println(rs.getInt(1));
                 }
             } catch (SQLException e) {
@@ -187,6 +187,39 @@ public final class DBFacade {
                 stmt = conn.createStatement();
                 stmt.execute(sql);
             }catch (SQLException e){
+                System.err.println(e.getMessage());
+            }
+        }
+    }
+
+    public static QuestionModel getRandomQuestionFromCategory(String category){
+        ArrayList<QuestionModel> questions = new ArrayList<>();
+        String sql = "SELECT q.* FROM question q, category c WHERE c.id = q.category AND c.name = '" + category + "'";
+        if(conn != null){
+            Statement stmt = null;
+            try{
+                stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(sql);
+                while(rs.next()){
+                    questions.add(new QuestionModel(rs.getInt(1), rs.getString(2), rs.getString(3),
+                            rs.getString(4), rs.getString(5), rs.getString(6), category, rs.getInt(7)));
+                }
+                return questions.get((int)(Math.random() * (questions.size())));
+            }catch (SQLException e){
+                System.err.println(e.getMessage());
+            }
+        }
+        return null;
+    }
+
+    public static void updateScore(PlayerModel playerModel) {
+        String sql = "UPDATE player SET score = " + playerModel.getScore() + " WHERE name = '" + playerModel.getName() + "'";
+        if (conn != null) {
+            Statement stmt = null;
+            try {
+                stmt = conn.createStatement();
+                stmt.execute(sql);
+            } catch (SQLException e) {
                 System.err.println(e.getMessage());
             }
         }

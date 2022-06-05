@@ -90,7 +90,7 @@ public class MainController {
     }
 
     @FXML
-    protected void  goToPlay(){
+    protected void goToPlay(){
         System.out.println("play");
         FXMLLoader fxmlLoader = new FXMLLoader(MisterQuestionApplication.class
                 .getResource("views/players-view.fxml"));
