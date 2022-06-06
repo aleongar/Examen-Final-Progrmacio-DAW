@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 
-<AnchorPane maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="daw.programacio.thenewmisterquestion.controllers.QuestionController">
+<AnchorPane maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" stylesheets="@../css/styles.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="daw.programacio.thenewmisterquestion.controllers.QuestionController">
    <children>
       <Label fx:id="titleLabel" contentDisplay="CENTER" layoutX="382.0" layoutY="71.0" text="Nova Pregunta" />
       <Label layoutX="126.0" layoutY="180.0" text="Pregunta" />

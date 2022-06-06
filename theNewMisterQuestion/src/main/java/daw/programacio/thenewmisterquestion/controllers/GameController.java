@@ -66,7 +66,7 @@ public class GameController {
     private Stage triviaStage;
     private PlayerModel[] players;
     private ToggleGroup tg;
-    private int turns;
+    private int[] turns;
 
     public void initialize(Stage stage, PlayerModel[] players, int turns){
         thisStage = stage;
@@ -75,7 +75,17 @@ public class GameController {
         initializePlayers();
         initializeButtons();
         showButtons();
-        this.turns = turns;
+        initializeTurns(turns);
+    }
+
+    private void initializeTurns(int turns){
+        this.turns = new int[4];
+        for(int i = 0; i < this.turns.length; i++){
+            if(players[i] == null)
+                this.turns[i] = 0;
+            else
+                this.turns[i] = turns;
+        }
     }
 
     private void initializePlayers(){
@@ -164,7 +174,7 @@ public class GameController {
     }
 
     private void checkRadioButton(RadioButton rb) {
-        if (rb == player1turn && player1turn.isSelected()) {
+        if (rb == player1turn) {
             if (player2turn.isVisible()) {
                 player2turn.setSelected(true);
             } else if (player3turn.isVisible()) {
@@ -174,8 +184,9 @@ public class GameController {
             }
             player1turn.setSelected(false);
             player1turn.setDisable(true);
+            turns[0]--;
         }
-        else if (rb == player2turn && player2turn.isSelected()) {
+        else if (rb == player2turn) {
             if (player1turn.isVisible()) {
                 player1turn.setSelected(true);
             } else if (player3turn.isVisible()) {
@@ -185,7 +196,8 @@ public class GameController {
             }
             player2turn.setSelected(false);
             player2turn.setDisable(true);
-        } else if (rb == player3turn && player3turn.isSelected()) {
+            turns[1]--;
+        } else if (rb == player3turn) {
             if (player1turn.isVisible()) {
                 player1turn.setSelected(true);
             } else if (player2turn.isVisible()) {
@@ -195,7 +207,8 @@ public class GameController {
             }
             player3turn.setSelected(false);
             player3turn.setDisable(true);
-        } else if (rb == player4turn && player4turn.isSelected()) {
+            turns[2]--;
+        } else if (rb == player4turn) {
             if (player1turn.isVisible()) {
                 player1turn.setSelected(true);
             } else if (player2turn.isVisible()) {
@@ -205,14 +218,18 @@ public class GameController {
             }
             player4turn.setSelected(false);
             player4turn.setDisable(true);
-        } else{
-            turns--;
-            if(turns == 0){
-                triviaStage.close();
-            }else{
-                setAllEnabled();
-            }
+            turns[3]--;
         }
+        if(checkTurns())
+            thisStage.close();
+    }
+
+    private boolean checkTurns(){
+        for(int i = 0; i < turns.length; i++) {
+            if(turns[i] != 0)
+                return false;
+        }
+        return true;
     }
 
     private void setAllEnabled(){

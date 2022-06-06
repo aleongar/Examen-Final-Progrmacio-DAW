@@ -54,7 +54,7 @@ public class PlayersController {
             throw new RuntimeException(e);
         }
         ((GameController) fxmlLoader.getController()).initialize(playStage, getPlayers(), (int)turnsSpinner.getValue());
-        playStage.setTitle("Hello!");
+        playStage.setTitle("Game");
         playStage.setScene(scene);
         playStage.show();
     }

@@ -5,13 +5,13 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="daw.programacio.thenewmisterquestion.controllers.GameController">
+<AnchorPane maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18"  stylesheets="@../css/styles.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="daw.programacio.thenewmisterquestion.controllers.GameController">
    <children>
-      <RadioButton fx:id="player1turn" layoutX="201.0" layoutY="122.0" mnemonicParsing="false" text="name1" visible="false" />
-      <RadioButton fx:id="player2turn" layoutX="201.0" layoutY="152.0" mnemonicParsing="false" text="name2" visible="false" />
-      <RadioButton fx:id="player3turn" layoutX="201.0" layoutY="179.0" mnemonicParsing="false" text="name3" visible="false" />
+      <RadioButton fx:id="player1turn" disable="true" layoutX="201.0" layoutY="122.0" mnemonicParsing="false" text="name1" visible="false" />
+      <RadioButton fx:id="player2turn" disable="true" layoutX="201.0" layoutY="152.0" mnemonicParsing="false" text="name2" visible="false" />
+      <RadioButton fx:id="player3turn" disable="true" layoutX="201.0" layoutY="179.0" mnemonicParsing="false" text="name3" visible="false" />
       <Label fx:id="player1points" layoutX="303.0" layoutY="122.0" text="points" visible="false" />
-      <RadioButton fx:id="player4turn" layoutX="201.0" layoutY="207.0" mnemonicParsing="false" text="name4" visible="false" />
+      <RadioButton fx:id="player4turn" disable="true" layoutX="201.0" layoutY="207.0" mnemonicParsing="false" text="name4" visible="false" />
       <Label fx:id="player2points" layoutX="303.0" layoutY="152.0" text="points" visible="false" />
       <Label fx:id="player3points" layoutX="303.0" layoutY="179.0" text="points" visible="false" />
       <Label fx:id="player4points" layoutX="303.0" layoutY="207.0" text="points" visible="false" />
